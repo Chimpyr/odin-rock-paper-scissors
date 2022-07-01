@@ -1,21 +1,22 @@
 
+const weapons = ["rock", "paper", "scissors"];
 function computerPlay() {
-    const weapons = ["rock", "paper", "scissors"];
+    
     // Generates random number betwen 1 and 3
     randomNum = Math.floor((Math.random() * (4-1)) + 1);
     // Converts number selection into corresponding string value from array
     computerSelection = weapons[randomNum - 1];
-    console.log("Comp selection: " + computerSelection);
+    //console.log("Comp selection: " + computerSelection);
     return computerSelection;
 }
 
 
-function round(playerSelection = "rock", computerChoice) {
+function round(playerSelection, computerChoice) {
     // Converts player selection into all lowercase so it is case insensitive
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerChoice;
-    console.log("Player selection in round: " + playerSelection);
-    console.log("comp selection in round: " + computerSelection);
+    //console.log("Player selection in round: " + playerSelection);
+    //console.log("comp selection in round: " + computerSelection);
 
     if (playerSelection == computerSelection) {
         console.log("Tie Round");
@@ -43,8 +44,15 @@ function game() {
     let score = 0;
     // Loop for 5 rounds
     for (let i = 0; i < 5; i++) {
-        userInput = window.prompt("Select: Rock, Paper or Scissors.");
-        console.log("user selec: " + userInput);
+        let userInput = "wrong";
+
+        // Ensure that the user input is one of the options
+        do {
+            userInput = window.prompt("Select: Rock, Paper or Scissors.");
+            //console.log('post check user input is :' + userInput);
+        }
+        while (weapons.indexOf(userInput) == -1);
+
         computerSelection = computerPlay();
         result = round(userInput, computerSelection);
         // Add score on every win
